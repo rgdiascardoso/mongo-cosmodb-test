@@ -42,4 +42,4 @@ jobs:
         with:
           name: artifact
       - name: Build Docker container
-        run: docker build -t spring-test artifact/myJar.jar
+        run: docker build -t spring-test .
