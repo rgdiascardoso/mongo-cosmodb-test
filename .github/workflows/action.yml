@@ -43,8 +43,8 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: artifact
-      - name: Build Docker container
       - uses: azure/docker-login@v1
+      - name: Build Docker container
         with:
           login-server: ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
