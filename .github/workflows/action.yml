@@ -43,13 +43,13 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: artifact
-      - uses: azure/docker-login@v1
       - name: Build Docker container
+      - uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
           password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
-        run: |
+      - run: |
           docker build -t ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/springtest:${{ github.sha }} .
           docker push ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/springtest:${{ github.sha }}
         
