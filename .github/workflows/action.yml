@@ -25,7 +25,9 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -f pom.xml install -DskipTests
+      env:
+        AZURE_MONGO_DB: ${{ secrets.AZURE_MONGO_DB }}
+      run: mvn -f pom.xml install
     - name: Upload Maven build artifact
       uses: actions/upload-artifact@v1
       with:
