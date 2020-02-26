@@ -12,7 +12,7 @@ public class BookController {
     @Autowired
     private BookRepository repository;
 
-    @PostMapping("/addBook")
+    @PostMapping("/books/new")
     public String saveBook(@RequestBody Book book){
         repository.save(book);
         return "Added book with ID: " + book.getBookId();
