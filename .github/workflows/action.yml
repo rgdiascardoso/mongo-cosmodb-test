@@ -39,21 +39,24 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: artifact
-      - name: Build Docker container
+      - name: Login to ACR
         uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
           password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
-      - run: |
+      - name: Build and Push Docker image to ACR
+        run: |
           docker build --build-arg AZURE_MONGO_DB="${{ secrets.AZURE_MONGO_DB }}" -t ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/springtest:${{ github.sha }} .
           docker push ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/springtest:${{ github.sha }}
-      - uses: azure/aks-set-context@v1
+      - name: Configure AKS context
+        uses: azure/aks-set-context@v1
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
           cluster-name: testcluster
           resource-group: testspring
-      - uses: Azure/k8s-deploy@v1
+      - name: Deploy rolling update to AKS cluster
+        uses: Azure/k8s-deploy@v1
         with:
           manifests: |
             manifests/deployment.yml
