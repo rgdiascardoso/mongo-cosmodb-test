@@ -1,4 +1,4 @@
-name: Deploy Spring Boot App as Docker Image to AKS
+name: Deploy Spring Boot App as Docker Container to AKS cluster
 on: [push]
 jobs:
   compile:
