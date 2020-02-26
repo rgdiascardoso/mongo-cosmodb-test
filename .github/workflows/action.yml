@@ -1,8 +1,9 @@
-name: Deploy Spring Boot App as Docker Image to Azure Container Registry
+name: Deploy Spring Boot App as Docker Image to AKS
 on: [push]
 jobs:
   compile:
     runs-on: ubuntu-latest
+    name: Compile Maven project
     steps:
       - uses: actions/checkout@master
       - name: Setup java
@@ -39,6 +40,8 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: artifact
+      - name: Copy .jar to default path
+        run: cp artifact/myJar.jar target/
       - name: Login to ACR
         uses: azure/docker-login@v1
         with:
