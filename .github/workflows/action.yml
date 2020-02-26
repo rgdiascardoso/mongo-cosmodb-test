@@ -41,7 +41,9 @@ jobs:
         with:
           name: artifact
       - name: Copy .jar to default path
-        run: cp artifact/myJar.jar target/
+        run: |
+          mkdir target
+          cp artifact/myJar.jar target/
       - name: Login to ACR
         uses: azure/docker-login@v1
         with:
