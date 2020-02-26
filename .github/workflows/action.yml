@@ -46,7 +46,7 @@ jobs:
           username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
           password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
       - run: |
-          docker build -t ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/springtest:${{ github.sha }} .
+          docker build --build-arg mongo-db-connection-string=${{ secrets.AZURE_MONGO_DB }} -t ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/springtest:${{ github.sha }} .
           docker push ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/springtest:${{ github.sha }}
       - uses: azure/aks-set-context@v1
         with:
