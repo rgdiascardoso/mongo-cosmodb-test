@@ -43,7 +43,7 @@ jobs:
       - name: Copy .jar to default path
         run: |
           mkdir target
-          cp artifact/myJar.jar target/
+          cp artifact/myJar.jar target/mongo-cosmodb-test.jar
       - name: Login to ACR
         uses: azure/docker-login@v1
         with:
