@@ -4,7 +4,7 @@ metadata:
   name: test-service
 spec:
   selector:
-    app: testapp
+    k8s-app: testapp
   ports:
   - protocol: TCP
     port: 8080
