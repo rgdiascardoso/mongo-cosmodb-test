@@ -1,5 +1,5 @@
 name: Deploy Spring Boot App as Docker Container to AKS cluster
-on: [push]
+on: [deployment]
 jobs:
   compile:
     runs-on: ubuntu-latest
