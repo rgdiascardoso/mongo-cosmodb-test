@@ -7,6 +7,7 @@ metadata:
     k8s-app: testapp
 spec:
   replicas: 3
+  minReadySeconds: 10
   selector:
     matchLabels:
       k8s-app: testapp
@@ -24,6 +25,12 @@ spec:
       containers:
         - name: testapp
           image: renatocardoso.azurecr.io/springtest:v1.0
+          env:
+          - name: AZURE_MONGO_DB
+            valueFrom:
+              secretKeyRef:
+                name: cosmosdb-connection-string
+                key: connection-string
           ports:
             - name: http
               containerPort: 8080
@@ -39,6 +46,5 @@ spec:
              path: /books
              port: 8080
              scheme: HTTP
-      dnsPolicy: ClusterFirst
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
