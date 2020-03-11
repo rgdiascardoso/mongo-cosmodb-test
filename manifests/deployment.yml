@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: testapp
-          image: renatocardoso.azurecr.io/springtest:v1.0
+          image: inditexacr.azurecr.io/springtest:v1.0
           env:
           - name: AZURE_MONGO_DB
             valueFrom:
